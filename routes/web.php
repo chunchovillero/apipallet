@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('documentation');
 });
 
 Route::resource('documentation','DocumentationController',['only'=>[
