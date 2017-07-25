@@ -15,7 +15,11 @@ class ClientesController extends Controller
      */
     public function index()
     {
-        $clientes=Cliente::where('is_customer', '=', 1)->get(['id'])->ToArray();
+        $clientes=Cliente::
+        where('is_customer', '=', 1)
+        ->select('company.identifier_name as name', 'company.code as ci_code','company.address as address','company.address_number as number', 'company.city as city', 'c_locations.name as commune')
+        ->leftjoin('c_locations','c_locations.id','=','company.location_id')
+        ->get();
         return response()->json($clientes);
     }
 
